@@ -1,0 +1,50 @@
+﻿<!-- @using Agility.Models
+@using Agility.NET.FetchAPI.Helpers
+@using Agility.NET.FetchAPI.Models.API
+@model ContentItemResponse<Agility.Models.HeroBanner>
+
+<div class="relative px-8" data-agility-component="@Model.ContentID">
+	<div class="max-w-screen-xl mx-auto my-12 md:mt-18 lg:mt-20">
+		<h1 data-agility-field="title" class="font-display text-secondary-500 text-4xl font-black tracking-wide">
+			@Model.Fields.BannerHeading
+		</h1>
+	</div>
+</div> -->
+
+@using Agility.Models
+@using Agility.NET.FetchAPI.Models.API
+@model ContentItemResponse<Agility.Models.HeroBanner>
+
+@{
+    var fields = Model?.Fields;
+    var img    = fields?.BannerImage;
+    var title  = fields?.BannerHeading ?? "Hero Banner";
+}
+
+<!-- Full-bleed hero -->
+<section data-agility-component="@Model.ContentID"
+         class="relative left-1/2 right-1/2 ml-[-50vw] mr-[-50vw] w-screen overflow-hidden"
+         style="min-height:65vh;">
+    @if (!string.IsNullOrWhiteSpace(img?.Url))
+    {
+        <img data-agility-field="bannerImage"
+             src="@img!.Url"
+             alt="@(img.Label ?? title)"
+             class="absolute inset-0 w-full h-full object-cover object-center" />
+    }
+    else
+    {
+        <div class="absolute inset-0 bg-gray-200"></div>
+    }
+
+    <div class="absolute inset-0 bg-black/40 md:bg-black/50"></div>
+
+    <!-- This wrapper ensures the content area also has the same min-height -->
+    <div class="relative z-10 flex items-center justify-center px-6"
+         style="min-height:65vh;">
+        <h1 data-agility-field="bannerHeading"
+            class="text-white text-4xl md:text-6xl font-black font-display drop-shadow-lg text-center">
+            @title
+        </h1>
+    </div>
+</section>

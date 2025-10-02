@@ -113,6 +113,14 @@ namespace Agility.Models
 
 	}
 
+	public partial class HeroBanner
+	{
+		public string BannerHeading { get; set; }
+
+		public ImageAttachment BannerImage { get; set; }
+
+	}
+
 	public partial class ImageAttachment
 	{
 		public string Label { get; set; }
